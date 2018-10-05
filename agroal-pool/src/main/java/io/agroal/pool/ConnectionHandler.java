@@ -92,6 +92,10 @@ public final class ConnectionHandler {
         }
     }
 
+    public State getState() {
+        return state;
+    }
+
     public boolean setState(State expected, State newState) {
         if ( expected == State.DESTROYED ) {
             throw new IllegalArgumentException( "Trying to move out of state DESTROYED" );

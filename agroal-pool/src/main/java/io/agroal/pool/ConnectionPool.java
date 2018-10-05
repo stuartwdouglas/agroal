@@ -251,7 +251,7 @@ public final class ConnectionPool implements MetricsEnabledListener, AutoCloseab
                 synchronizer.releaseConditional();
                 metricsRepository.afterConnectionReturn();
                 fireOnConnectionReturn( listeners, handler );
-            } else {
+            } else if(handler.getState() == FLUSH){
                 // handler not in CHECKED_OUT implies FLUSH
                 housekeepingExecutor.execute( new FlushTask( handler ) );
                 housekeepingExecutor.execute( new FillTask() );
